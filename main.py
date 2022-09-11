@@ -2,10 +2,8 @@ import yaml
 
 from models.loader import ModelConfigurationLoader
 
-
-
-RUN_MODE = ['train', 'val', 'test']
-TRAIN_SPLIT = ['train', 'train+val']
+'''
+## REQUIRED: external configuration parameters
 MODEL = [
     'ban_4',
     'ban_8',
@@ -18,11 +16,72 @@ MODEL = [
     'mmnasnet_small'
 ]
 
+RUN_MODE = ['train', 'val', 'test']
+
+
+## OPTIONAL: external configuration parameters
+TRAIN_SPLIT = ['train', 'train+val']
+# set training split
+
+EVAL_EVERY_EPOCH = [True, False] 
+# True: evaluate the val split when an epoch finished
+# False: do not evaluate on local
+
+TEST_SAVE_PRED = [True, False]
+# True: save the prediction vectors
+# False: do not save the prediction vectors
+
+BATCH_SIZE = Integer
+# batch size in training
+
+GPU = Integer 
+# gpu choose
+
+SEED = Integer
+# fix random seed
+
+VERSION = String
+# version control
+
+RESUME = [True, False]
+# True: use checkpoint to resume training
+# False: start training with random init
+
+CKPT_VERSION = String
+# checkpoint version
+
+CKPT_EPOCH = Integer
+# checkpoint epoch
+
+CKPT_PATH = String
+# load checkpoint path
+# recommended - use CKPT_VERSION and CKPT_EPOCH instead
+# overrides CKPT_VERSION and CKPT_EPOCH
+
+GRAD_ACCU_STEPS = Integer
+# split batch to reduce gpu memory usage
+
+NUM_WORKERS = Integer
+# multithreaded loading to accelerate IO
+
+PIN_MEM = [True, False]
+# True: use pin memory
+# False: not use pin memory
+
+VERBOSE = [True, False]
+# True: verbose print
+# False: simple print
+'''
+
 
 options = {
-    'RUN_MODE' : RUN_MODE[1],
-    'TRAIN_SPLIT': TRAIN_SPLIT[1],
-    'MODEL' : MODEL[0]
+    # required
+    'MODEL' : 'ban_4',
+    'RUN_MODE' : 'train',
+
+    # optionals
+    'TRAIN_SPLIT': 'train',
+    'VERBOSE': True
 }
 
 
