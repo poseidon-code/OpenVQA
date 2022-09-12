@@ -1,6 +1,7 @@
 import yaml
 
 from models.loader import ModelConfigurationLoader
+from scripts.exec import Execution
 
 '''
 ## REQUIRED: external configuration parameters
@@ -95,5 +96,5 @@ if __name__ == "__main__":
     configuration.proc()
     print(configuration)
 
-    # execution = Execution(cfg)
+    execution = Execution(configuration)
     # execution.run(cfg.RUN_MODE)
