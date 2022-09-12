@@ -1,12 +1,7 @@
-# --------------------------------------------------------
-# OpenVQA
-# Written by Zhenwei Shao https://github.com/ParadoxZW
-# --------------------------------------------------------
-
-import torch.nn as nn
 import torch
-from openvqa.core.base_dataset import BaseAdapter
-from openvqa.utils.make_mask import make_mask
+import torch.nn as nn
+from core.dataset import BaseAdapter
+from utils.make_mask import make_mask
 
 
 class Adapter(BaseAdapter):

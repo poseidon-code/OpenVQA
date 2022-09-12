@@ -1,13 +1,9 @@
-# --------------------------------------------------------
-# OpenVQA
-# Written by Zhenwei Shao https://github.com/ParadoxZW
-# Based on the implementation of paper "Bilinear Attention Neworks", NeurIPS 2018 https://github.com/jnhwkim/ban-vqa)
-# --------------------------------------------------------
+import math
 
+import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.nn.utils.weight_norm import weight_norm
-import torch, math
 
 # ------------------------------
 # ----- Weight Normal MLP ------
