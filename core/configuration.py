@@ -57,23 +57,21 @@ class Configuration(Paths):
     def proc(self):
         assert self.RUN_MODE in ['train', 'val', 'test']
 
-        # ------------ Devices setup
+        # devices setup
         os.environ['CUDA_VISIBLE_DEVICES'] = self.GPU
         self.N_GPU = len(self.GPU.split(','))
         self.DEVICES = [_ for _ in range(self.N_GPU)]
         torch.set_num_threads(2)
 
 
-        # ------------ Path check
+        # path check
         self.check_path()
 
-        # ------------ Seed setup
+        # seed setup
         # fix pytorch seed
         torch.manual_seed(self.SEED)
-        if self.N_GPU < 2:
-            torch.cuda.manual_seed(self.SEED)
-        else:
-            torch.cuda.manual_seed_all(self.SEED)
+        if self.N_GPU < 2: torch.cuda.manual_seed(self.SEED)
+        else: torch.cuda.manual_seed_all(self.SEED)
         torch.backends.cudnn.deterministic = True
 
         # fix numpy seed
@@ -83,12 +81,11 @@ class Configuration(Paths):
         random.seed(self.SEED)
 
         if self.CKPT_PATH is not None:
-            print("Warning: you are now using 'CKPT_PATH' args, "
-                  "'CKPT_VERSION' and 'CKPT_EPOCH' will not work")
+            print("Warning: you are now using 'CKPT_PATH' args, 'CKPT_VERSION' and 'CKPT_EPOCH' will not work")
             self.CKPT_VERSION = self.CKPT_PATH.split('/')[-1] + '_' + str(random.randint(0, 9999999))
 
 
-        # ------------ Split setup
+        # split setup
         self.SPLIT = self.SPLITS
         self.SPLIT['train'] = self.TRAIN_SPLIT
         if self.SPLIT['val'] in self.SPLIT['train'].split('+') or self.RUN_MODE not in ['train']:
@@ -98,53 +95,49 @@ class Configuration(Paths):
             self.TEST_SAVE_PRED = False
 
 
-        # ------------ Gradient accumulate setup
+        # gradient accumulate setup
         assert self.BATCH_SIZE % self.GRAD_ACCU_STEPS == 0
         self.SUB_BATCH_SIZE = int(self.BATCH_SIZE / self.GRAD_ACCU_STEPS)
 
-        # Set small eval batch size will reduce gpu memory usage
+        # set small eval batch size will reduce gpu memory usage
         self.EVAL_BATCH_SIZE = int(self.SUB_BATCH_SIZE / 2)
 
 
-        # ------------ Loss process
+        # loss process
         assert self.LOSS_FUNC in ['ce', 'bce', 'kld', 'mse']
         assert self.LOSS_REDUCTION in ['none', 'elementwise_mean', 'sum']
 
         self.LOSS_FUNC_NAME_DICT = {
-            'ce': 'CrossEntropyLoss',
-            'bce': 'BCEWithLogitsLoss',
-            'kld': 'KLDivLoss',
-            'mse': 'MSELoss',
+            'ce'    : 'CrossEntropyLoss',
+            'bce'   : 'BCEWithLogitsLoss',
+            'kld'   : 'KLDivLoss',
+            'mse'   : 'MSELoss',
         }
 
         self.LOSS_FUNC_NONLINEAR = {
-            'ce': [None, 'flat'],
-            'bce': [None, None],
-            'kld': ['log_softmax', None],
-            'mse': [None, None],
+            'ce'    : [None, 'flat'],
+            'bce'   : [None, None],
+            'kld'   : ['log_softmax', None],
+            'mse'   : [None, None],
         }
 
-        self.TASK_LOSS_CHECK = {
-            'vqa': ['bce', 'kld'],
-            'gqa': ['ce'],
-            'clevr': ['ce'],
-        }
+        self.TASK_LOSS_CHECK = ['bce', 'kld']
 
         assert self.LOSS_FUNC in self.TASK_LOSS_CHECK, \
-            self.DATASET + 'task only support' + str(self.TASK_LOSS_CHECK) + 'loss.' + \
-            'Modify the LOSS_FUNC in configs to get a better score.'
+            f'{self.DATASET} task only support {str(self.TASK_LOSS_CHECK)} loss. Modify the LOSS_FUNC in configs to get a better score.'
 
 
-        # ------------ Optimizer parameters process
+        # optimizer parameters process
         assert self.OPT in ['Adam', 'Adamax', 'RMSprop', 'SGD', 'Adadelta', 'Adagrad']
         optim = getattr(torch.optim, self.OPT)
-        default_params_dict = dict(zip(optim.__init__.__code__.co_varnames[3: optim.__init__.__code__.co_argcount],
-                                       optim.__init__.__defaults__[1:]))
+        default_params_dict = dict(zip(
+            optim.__init__.__code__.co_varnames[3: optim.__init__.__code__.co_argcount],
+            optim.__init__.__defaults__[1:]
+        ))
 
         def all(iterable):
             for element in iterable:
-                if not element:
-                    return False
+                if not element: return False
             return True
         assert all(list(map(lambda x: x in default_params_dict, self.OPT_PARAMS)))
 
@@ -156,10 +149,11 @@ class Configuration(Paths):
                 exit(-1)
         self.OPT_PARAMS = {**default_params_dict, **self.OPT_PARAMS}
 
+
     def __str__(self):
-        __C_str = ''
+        configurationString = ''
         for attr in dir(self):
             if not attr.startswith('__') and not isinstance(getattr(self, attr), MethodType):
-                __C_str += '{ %-17s }->' % attr + str(getattr(self, attr)) + '\n'
+                configurationString += '{ %-17s } -> ' % attr + str(getattr(self, attr)) + '\n'
 
-        return __C_str
+        return configurationString

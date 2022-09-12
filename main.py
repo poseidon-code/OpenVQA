@@ -92,6 +92,7 @@ if __name__ == "__main__":
     configuration = ModelConfigurationLoader(modelConfiguration['MODEL_USE']).load()
     modelParameters = {**modelConfiguration, **options}
     configuration.add_args(modelParameters)
+    configuration.proc()
     print(configuration)
 
     # execution = Execution(cfg)
