@@ -5,15 +5,9 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.nn.utils.weight_norm import weight_norm
 
-# ------------------------------
-# ----- Weight Normal MLP ------
-# ------------------------------
 
+# Weight Normal MLP
 class MLP(nn.Module):
-    """
-    Simple class for non-linear fully connect network
-    """
-
     def __init__(self, dims, act='ReLU', dropout_r=0.0):
         super(MLP, self).__init__()
 
@@ -32,15 +26,9 @@ class MLP(nn.Module):
     def forward(self, x):
         return self.mlp(x)
 
-# ------------------------------
-# ------ Bilinear Connect ------
-# ------------------------------
 
+# Bilinear Connect
 class BC(nn.Module):
-    """
-    Simple class for non-linear bilinear connect network
-    """
-
     def __init__(self, __C, atten=False):
         super(BC, self).__init__()
 
@@ -75,11 +63,8 @@ class BC(nn.Module):
         logits = self.p_net(logits).squeeze(1) * self.__C.K_TIMES  # sum-pooling
         return logits
 
-# ------------------------------
-# -------- BiAttention ---------
-# ------------------------------
 
-
+# BiAttention
 class BiAttention(nn.Module):
     def __init__(self, __C):
         super(BiAttention, self).__init__()
@@ -104,10 +89,8 @@ class BiAttention(nn.Module):
 
         return logits
 
-# ------------------------------
-# - Bilinear Attention Network -
-# ------------------------------
 
+# Bilinear Attention Network
 class BAN(nn.Module):
     def __init__(self, __C):
         super(BAN, self).__init__()
