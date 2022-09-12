@@ -1,11 +1,17 @@
-import os, torch, datetime, shutil, time
+import datetime
+import os
+import shutil
+import time
+
 import numpy as np
+import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.utils.data as Data
 from models.loader import ModelLoader
-from utils.optim import get_optim, adjust_lr
-from scripts.test_engine import test_engine, ckpt_proc
+from utils.optim import adjust_lr, get_optim
+
+from scripts.test_engine import ckpt_proc, test_engine
 
 
 def train_engine(configuration, dataset, dataset_eval=None):
