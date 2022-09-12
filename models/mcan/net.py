@@ -1,18 +1,11 @@
-# --------------------------------------------------------
-# OpenVQA
-# Written by Yuhao Cui https://github.com/cuiyuhao1996
-# --------------------------------------------------------
-
-from openvqa.utils.make_mask import make_mask
-from openvqa.ops.fc import FC, MLP
-from openvqa.ops.layer_norm import LayerNorm
-from openvqa.models.mcan.mca import MCA_ED
-from openvqa.models.mcan.adapter import Adapter
-
+import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import torch
-
+from models.mcan.adapter import Adapter
+from models.mcan.mca import MCA_ED
+from ops.fc import FC, MLP
+from ops.layer_norm import LayerNorm
+from utils.make_mask import make_mask
 
 # ------------------------------
 # ---- Flatten the sequence ----

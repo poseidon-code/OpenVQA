@@ -1,14 +1,7 @@
-# --------------------------------------------------------
-# OpenVQA
-# Licensed under The MIT License [see LICENSE for details]
-# Written by Pengbing Gao https://github.com/nbgao
-# --------------------------------------------------------
-
-from openvqa.ops.fc import MLP
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
+from ops.fc import MLP
 
 # -------------------------------------------------------------
 # ---- Multi-Model Hign-order Bilinear Pooling Co-Attention----

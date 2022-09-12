@@ -1,16 +1,9 @@
-# --------------------------------------------------------
-# OpenVQA
-# Written by Zhenwei Shao https://github.com/ParadoxZW
-# based on the implementation in https://github.com/hengyuan-hu/bottom-up-attention-vqa
-# ELU is chosen as the activation function in non-linear layers due to
-# the experiment results that indicate ELU is better than ReLU in BUTD model.
-# --------------------------------------------------------
+import math
 
+import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.nn.utils.weight_norm import weight_norm
-import torch
-import math
 
 # ------------------------------
 # ----- Weight Normal MLP ------

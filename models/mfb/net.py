@@ -1,11 +1,5 @@
-# --------------------------------------------------------
-# OpenVQA
-# Licensed under The MIT License [see LICENSE for details]
-# Written by Pengbing Gao https://github.com/nbgao
-# --------------------------------------------------------
-
-from openvqa.models.mfb.mfb import CoAtt
-from openvqa.models.mfb.adapter import Adapter
+from models.mfb.mfb import CoAtt
+from models.mfb.adapter import Adapter
 import torch
 import torch.nn as nn
 

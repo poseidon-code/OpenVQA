@@ -1,13 +1,8 @@
-# --------------------------------------------------------
-# OpenVQA
-# Written by Pengbing Gao https://github.com/nbgao
-# --------------------------------------------------------
-
-import torch.nn as nn
 import torch
+import torch.nn as nn
 import torch.nn.functional as F
-from openvqa.core.base_dataset import BaseAdapter
-from openvqa.utils.make_mask import make_mask
+from core.base_dataset import BaseAdapter
+from utils.make_mask import make_mask
 
 
 class Adapter(BaseAdapter):

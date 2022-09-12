@@ -1,16 +1,10 @@
-# --------------------------------------------------------
-# OpenVQA
-# Written by Yuhao Cui https://github.com/cuiyuhao1996
-# --------------------------------------------------------
-
-from openvqa.ops.fc import FC, MLP
-from openvqa.ops.layer_norm import LayerNorm
-
-import torch.nn as nn
-import torch.nn.functional as F
-import torch
 import math
 
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+from ops.fc import FC, MLP
+from ops.layer_norm import LayerNorm
 
 # ------------------------------
 # ---- Multi-Head Attention ----

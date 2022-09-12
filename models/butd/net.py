@@ -1,17 +1,10 @@
-# --------------------------------------------------------
-# OpenVQA
-# Written by Zhenwei Shao https://github.com/ParadoxZW
-# --------------------------------------------------------
-
-from openvqa.utils.make_mask import make_mask
-from openvqa.models.butd.tda import TDA
-from openvqa.models.butd.adapter import Adapter
-
+import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from models.butd.adapter import Adapter
+from models.butd.tda import TDA
 from torch.nn.utils.weight_norm import weight_norm
-import torch
-
+from utils.make_mask import make_mask
 
 # -------------------------
 # ---- Main BUTD Model ----

@@ -1,18 +1,11 @@
-# --------------------------------------------------------
-# OpenVQA
-# Written by Zhenwei Shao https://github.com/ParadoxZW
-# --------------------------------------------------------
-
-from openvqa.utils.make_mask import make_mask
-from openvqa.ops.fc import FC, MLP
-from openvqa.ops.layer_norm import LayerNorm
-from openvqa.models.mmnasnet.nasnet import NAS_ED
-from openvqa.models.mmnasnet.adapter import Adapter
-
+import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import torch
-
+from models.mmnasnet.adapter import Adapter
+from models.mmnasnet.nasnet import NAS_ED
+from ops.fc import FC, MLP
+from ops.layer_norm import LayerNorm
+from utils.make_mask import make_mask
 
 # ------------------------------
 # ---- Flatten the sequence ----
