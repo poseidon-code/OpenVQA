@@ -1,7 +1,11 @@
-import os, copy
+import copy
+import os
+
 from datasets.loader import DataSetLoader
-from scripts.train_engine import train_engine
+
 from scripts.test_engine import test_engine
+from scripts.train_engine import train_engine
+
 
 class Execution:
     def __init__(self, configuration):

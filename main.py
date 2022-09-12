@@ -97,4 +97,4 @@ if __name__ == "__main__":
     print(configuration)
 
     execution = Execution(configuration)
-    # execution.run(cfg.RUN_MODE)
+    execution.run(configuration.RUN_MODE)
