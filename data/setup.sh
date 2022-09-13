@@ -22,11 +22,11 @@ cp feats/test2015/v2_OpenEnded_mscoco_test2015_questions.json raw/
 
 # download VQA 2017 training annotations
 wget https://s3.amazonaws.com/cvmlp/vqa/mscoco/vqa/v2_Annotations_Train_mscoco.zip
-unzip -f v2_Annotations_Train_mscoco.zip -d raw/
+unzip v2_Annotations_Train_mscoco.zip -d raw/
 
 # download VQA 2017 validation annotations
 wget https://s3.amazonaws.com/cvmlp/vqa/mscoco/vqa/v2_Annotations_Val_mscoco.zip
-unzip -f v2_Annotations_Val_mscoco.zip -d raw/
+unzip v2_Annotations_Val_mscoco.zip -d raw/
 
 
 
