@@ -2,3 +2,5 @@ numpy==1.23.3
 PyYAML==6.0
 torch==1.12.1
 typing_extensions==4.3.0
+spacy==3.4.1
+Pillow==9.2.0
