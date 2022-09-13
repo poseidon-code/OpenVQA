@@ -1,5 +1,6 @@
 import yaml
 
+from data.convert import JPGtoNPZ
 from models.loader import ModelConfigurationLoader
 from scripts.exec import Execution
 
@@ -96,5 +97,6 @@ if __name__ == "__main__":
     configuration.proc()
     print(configuration)
 
+    JPGtoNPZ(configuration)
     execution = Execution(configuration)
     execution.run(configuration.RUN_MODE)
