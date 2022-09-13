@@ -1,22 +1,16 @@
-# --------------------------------------------------------
-# mcan-vqa (Deep Modular Co-Attention Networks)
-# Licensed under The MIT License [see LICENSE for details]
-# Written by Yuhao Cui https://github.com/cuiyuhao1996
-# --------------------------------------------------------
-
 import sys
-sys.path.append('../')
-from openvqa.utils.ans_punct import prep_ans
-from openvqa.core.path_cfgs import PATH
+
+sys.path.append('..')
 import json
 
-path = PATH()
+from core.paths import Paths
+from utils.ans_punct import prep_ans
 
-# Loading answer word list
+path = Paths()
+
 stat_ans_list = \
-    json.load(open(path.RAW_PATH['vqa']['train-anno'], 'r'))['annotations'] + \
-    json.load(open(path.RAW_PATH['vqa']['val-anno'], 'r'))['annotations']
-
+    json.load(open(path.RAW_PATH['train-anno'], 'r'))['annotations'] + \
+    json.load(open(path.RAW_PATH['val-anno'], 'r'))['annotations']
 
 def ans_stat(stat_ans_list):
     ans_to_ix = {}
@@ -41,7 +35,7 @@ def ans_stat(stat_ans_list):
 
     return ans_to_ix, ix_to_ans
 
+
 ans_to_ix, ix_to_ans = ans_stat(stat_ans_list)
 print(ans_to_ix)
-# print(ans_to_ix.__len__())
-json.dump([ans_to_ix, ix_to_ans], open('../openvqa/datasets/vqa/answer_dict.json', 'w'))
+json.dump([ans_to_ix, ix_to_ans], open('../datasets/answer_dict.json', 'w'))
