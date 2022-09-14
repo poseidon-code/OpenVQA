@@ -1,7 +1,7 @@
 import copy
 import os
 
-from datasets.loader import DataSetLoader
+from datasets.vqa import DataSet
 
 from scripts.test_engine import test_engine
 from scripts.train_engine import train_engine
@@ -11,14 +11,14 @@ class Execution:
     def __init__(self, configuration):
         self.configuration = configuration
         print('Loading dataset........')
-        self.dataset = DataSetLoader(configuration).DataSet()
+        self.dataset = DataSet(self.configuration)
 
         self.dataset_eval = None
         if configuration.EVAL_EVERY_EPOCH:
             configuration_eval = copy.deepcopy(configuration)
             setattr(configuration_eval, 'RUN_MODE', 'val')
             print('Loading validation set for per-epoch evaluation........')
-            self.dataset_eval = DataSetLoader(configuration_eval).DataSet()
+            self.dataset_eval = DataSet(configuration_eval)
 
     def run(self, run_mode):
         if run_mode == 'train':

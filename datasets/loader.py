@@ -1,15 +1,5 @@
 from importlib import import_module
 
-class DataSetLoader:
-    def __init__(self, configuration):
-        self.configuration = configuration
-        self.dataset = configuration.DATASET
-        self.dataset_moudle = import_module(f'datasets.vqa')
-
-    def DataSet(self):
-        return self.dataset_moudle.DataSet(self.configuration)
-
-
 class EvalLoader:
     def __init__(self, __C):
         self.__C = __C
